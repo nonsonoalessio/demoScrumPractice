@@ -1,10 +1,13 @@
+permissions:
+  contents: write
+
 name: Build and Release Linux Executable
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build-and-release:
@@ -16,7 +19,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.x'
+          python-version: "3.x"
 
       - name: Install dependencies
         run: |
@@ -33,8 +36,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: 'v1.0.0'
-          release_name: 'Release v1.0.0'
+          tag_name: "v1.0.0"
+          release_name: "Release v1.0.0"
           draft: false
           prerelease: false
 
