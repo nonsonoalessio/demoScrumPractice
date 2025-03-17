@@ -204,6 +204,8 @@ def show_help():
             print("\nEsempi:")
             for esempio in info['esempi']:
                 print(f"  {esempio}")
+
+    print("\n\n")
     
 def printExpression(a, b, operator, result):
     if(operator == 'Addizione'):
