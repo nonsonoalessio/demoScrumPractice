@@ -31,15 +31,12 @@ def acos(a, radians):
 def atan(a, radians):
      return math.degrees(math.atan(a)) if not radians else math.atan(a)
 
-def memorySelector(memory):
+def memorySelector(memory, prompt):
     memoryStrings = [str(i) for i in memory]
     choice = questionary.select(
         "Scegli il numero da usare:",
-        choices=memoryStrings + ["Cancella Memoria"],
+        choices=memoryStrings,
     ).ask()
-    if i == memoryStrings.index("Cancella Memoria"):
-        memory.clear()
-        return None
     i = memoryStrings.index(choice)
     return memory[i]
 
@@ -51,7 +48,7 @@ def validInput(prompt, memory, division=False):
             if a == "ans":
                 return memory[-1]
             elif a == "mem":
-                return memorySelector(memory)
+                return memorySelector(memory, prompt)
             
             num = float(a)
             
