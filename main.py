@@ -35,8 +35,11 @@ def memorySelector(memory):
     memoryStrings = [str(i) for i in memory]
     choice = questionary.select(
         "Scegli il numero da usare:",
-        choices=memoryStrings,
+        choices=memoryStrings + ["Cancella Memoria"],
     ).ask()
+    if i == memoryStrings.index("Cancella Memoria"):
+        memory.clear()
+        return None
     i = memoryStrings.index(choice)
     return memory[i]
 
@@ -63,7 +66,7 @@ def operatorChoice():
     return questionary.select(
         "Scegli un'operazione:",
         choices=[
-            "Addizione", "Sottrazione", "Moltiplicazione", "Divisione", "Trigonometria", "Aiuto", "Esci"]).ask()
+            "Addizione", "Sottrazione", "Moltiplicazione", "Divisione", "Trigonometria, Potenza, Radice Quadrata e Logaritmi", "Cronologia Operazioni", "Aiuto", "Esci"]).ask()
 
 
 def trigonometry(memory, cycleCount):
@@ -209,13 +212,17 @@ def show_help():
     
 def printExpression(a, b, operator, result):
     if(operator == 'Addizione'):
-        print(f"{a} + {b} = {result}")
+        return(f"{a} + {b} = {result}")
     elif(operator == 'Sottrazione'):
-        print(f"{a} - {b} = {result}")
+        return(f"{a} - {b} = {result}")
     elif(operator == 'Moltiplicazione'):
-        print(f"{a} * {b} = {result}")
+        return(f"{a} * {b} = {result}")
     else:
-        print(f"{a} : {b} = {result}")
+        return(f"{a} : {b} = {result}")
+
+def printHistory(expressions):
+    for expression in expressions:
+        print(expression + "\n")
 
 def calculator():
     memory = []
@@ -228,7 +235,7 @@ def calculator():
             show_help()
             operator = operatorChoice()
             
-        if operator == 'Trigonometria':
+        if operator == 'Trigonometria, Potenza, Radice Quadrata e Logaritmi':
             result = trigonometry(memory, cycleCount)
         
         else: 
@@ -251,7 +258,8 @@ def calculator():
             else:
                 result = subtraction(a, b)
             
-            printExpression(a, b, operator, result)
+            print(printExpression(a, b, operator, result))
+            
 
         print(f"Il risultato è: {result}")
 
